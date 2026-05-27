@@ -6,12 +6,16 @@ import SavedContracts from './components/SavedContracts'
 import Toast from './components/Toast'
 import { getSession, setSession, clearSession } from './utils/auth'
 import { getContracts } from './utils/storage'
+import PrivacyPolicy from './components/PrivacyPolicy'
+import TermsOfService from './components/TermsOfService'
+import Footer from './components/Footer'
 
 export default function App() {
   const [user, setUser] = useState(null)
   const [tab, setTab] = useState('generate')
   const [contracts, setContracts] = useState([])
   const [toast, setToast] = useState('')
+  const [page, setPage] = useState('home') // أضفه مع باقي الـ states
 
   useEffect(() => {
     const s = getSession()
@@ -32,7 +36,10 @@ export default function App() {
 
   const showToast = useCallback((msg) => setToast(msg), [])
 
-  if (!user) return <AuthScreen onLogin={handleLogin} />
+if (!user) return <AuthScreen onLogin={handleLogin} />
+
+  if (page === 'privacy') return <PrivacyPolicy onBack={() => setPage('home')} />
+  if (page === 'terms')   return <TermsOfService onBack={() => setPage('home')} />
 
   return (
     <>
@@ -56,6 +63,7 @@ export default function App() {
         {tab === 'saved' && <SavedContracts contracts={contracts} onDeleted={refresh} onToast={showToast} />}
       </div>
 
+      <Footer onNavigate={setPage} />
       {toast && <Toast message={toast} onClose={() => setToast('')} />}
     </>
   )
