@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 export default function ContactPage({ onBack }) {
-  const email = 'contact@contractassistant.com'
+  const email = 'contract20000@gmail.com'
   const [copied, setCopied] = useState(false)
 
   function handleCopy() {
