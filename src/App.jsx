@@ -1,11 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
-import AuthScreen from './components/AuthScreen'
+import { useState, useCallback } from 'react'
 import Navbar from './components/Navbar'
 import GenerateContract from './components/GenerateContract'
 import SavedContracts from './components/SavedContracts'
 import Toast from './components/Toast'
-import { getSession, setSession, clearSession } from './utils/auth'
-import { getContracts } from './utils/storage'
+import { getContracts, saveContract, deleteContract } from './utils/storage'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import Footer from './components/Footer'
@@ -13,45 +11,29 @@ import AboutPage from './components/AboutPage'
 import ContactPage from './components/ContactPage'
 
 export default function App() {
-  const [user, setUser] = useState(null)
   const [tab, setTab] = useState('generate')
-  const [contracts, setContracts] = useState([])
+  const [contracts, setContracts] = useState(() => getContracts('guest'))
   const [toast, setToast] = useState('')
-  const [page, setPage] = useState('home') // أضفه مع باقي الـ states
-
-  useEffect(() => {
-    const s = getSession()
-    if (s) { setUser(s); setContracts(getContracts(s.id)) }
-  }, [])
-
-  function handleLogin(u) {
-    setUser(u); setSession(u); setContracts(getContracts(u.id))
-  }
-
-  function handleLogout() {
-    clearSession(); setUser(null); setContracts([])
-  }
+  const [page, setPage] = useState('home')
 
   function refresh() {
-    setContracts(getContracts(user.id))
+    setContracts(getContracts('guest'))
   }
 
   const showToast = useCallback((msg) => setToast(msg), [])
 
-if (!user) return <AuthScreen onLogin={handleLogin} />
-
   if (page === 'privacy') return <PrivacyPolicy onBack={() => setPage('home')} />
   if (page === 'terms')   return <TermsOfService onBack={() => setPage('home')} />
- if (page === 'about')   return <AboutPage   onBack={() => setPage('home')} />
+  if (page === 'about')   return <AboutPage onBack={() => setPage('home')} />
   if (page === 'contact') return <ContactPage onBack={() => setPage('home')} />
-  
+
   return (
     <>
-      <Navbar user={user} onLogout={handleLogout} />
+      <Navbar />
       <div className="dashboard">
         <div className="dashboard-header">
-          <h2>Welcome back, {user.name.split(' ')[0]} 👋</h2>
-          <p>Generate professional contracts in seconds — completely free, no internet required.</p>
+          <h2>Contract Assistant 📄</h2>
+          <p>Generate professional contracts in seconds — completely free, no sign-up required.</p>
         </div>
 
         <div className="tabs">
@@ -63,7 +45,7 @@ if (!user) return <AuthScreen onLogin={handleLogin} />
           </button>
         </div>
 
-        {tab === 'generate' && <GenerateContract user={user} onSaved={refresh} onToast={showToast} />}
+        {tab === 'generate' && <GenerateContract user={{ id: 'guest' }} onSaved={refresh} onToast={showToast} />}
         {tab === 'saved' && <SavedContracts contracts={contracts} onDeleted={refresh} onToast={showToast} />}
       </div>
 
