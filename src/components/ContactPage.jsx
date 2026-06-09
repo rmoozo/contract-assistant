@@ -15,7 +15,7 @@ export default function ContactPage({ onBack }) {
       <div className="legal-container">
         <button className="btn-back" onClick={onBack}>← Back</button>
         <h1>Contact Us</h1>
-        <p className="legal-updated">We typically respond within 1–2 business days.</p>
+        <p className="legal-updated">We typically respond within 24 hours.</p>
 
         <section>
           <h2>Get in Touch</h2>
