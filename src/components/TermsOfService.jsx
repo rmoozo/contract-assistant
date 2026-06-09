@@ -67,7 +67,7 @@ export default function TermsOfService({ onBack }) {
           <h2>10. Contact Us</h2>
           <div className="legal-contact">
             <p><strong>Contract Assistant</strong></p>
-            <p>Email: <a href="mailto:legal@contractassistant.com">legal@contractassistant.com</a></p>
+            <p>Email: <a href="contract20000@gmail.com">contract20000@gmail.com</a></p>
           </div>
         </section>
       </div>
