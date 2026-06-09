@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://contract-assistant-zeta.vercel.app/sitemap.xml
