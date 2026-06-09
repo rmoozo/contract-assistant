@@ -1,14 +1,13 @@
 import { useState } from 'react'
 
 export default function ContactPage({ onBack }) {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
-  const [sent, setSent] = useState(false)
+  const email = 'contact@contractassistant.com'
+  const [copied, setCopied] = useState(false)
 
-  function handleSubmit() {
-    if (!name || !email || !message) { alert('Please fill in all fields'); return }
-    setSent(true)
+  function handleCopy() {
+    navigator.clipboard.writeText(email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   return (
@@ -18,40 +17,16 @@ export default function ContactPage({ onBack }) {
         <h1>Contact Us</h1>
         <p className="legal-updated">We typically respond within 1–2 business days.</p>
 
-        {sent ? (
-          <div className="contact-success">
-            <div className="success-icon">✅</div>
-            <h2>Message Sent!</h2>
-            <p>Thank you for reaching out. We'll get back to you shortly.</p>
-            <button className="btn-primary" style={{marginTop:'1rem', width:'auto', padding:'10px 24px'}} onClick={onBack}>
-              Back to Home
+        <section>
+          <h2>Get in Touch</h2>
+          <p>Have a question or feedback? Send us an email and we'll get back to you shortly.</p>
+          <div className="legal-contact" style={{display:'flex', alignItems:'center', justifyContent:'space-between', gap:'1rem'}}>
+            <span style={{fontSize:'1rem', fontWeight:'600', color:'#185FA5'}}>{email}</span>
+            <button className="btn-icon" onClick={handleCopy}>
+              {copied ? '✅ Copied!' : '📋 Copy'}
             </button>
           </div>
-        ) : (
-          <section>
-            <div className="form-group">
-              <label>Full Name</label>
-              <input type="text" placeholder="John Doe" value={name} onChange={e => setName(e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label>Email Address</label>
-              <input type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label>Message</label>
-              <textarea
-                className="field-textarea"
-                style={{minHeight:'150px'}}
-                placeholder="How can we help you?"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-              />
-            </div>
-            <button className="btn-primary" onClick={handleSubmit}>
-              Send Message
-            </button>
-          </section>
-        )}
+        </section>
       </div>
     </div>
   )
