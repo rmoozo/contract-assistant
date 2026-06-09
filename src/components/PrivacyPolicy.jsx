@@ -8,7 +8,7 @@ export default function PrivacyPolicy({ onBack }) {
 
         <section>
           <h2>1. Introduction</h2>
-          <p>Welcome to Contract Assistant ("we", "us", or "our"). We are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and share information when you use our services.</p>
+          <p>Welcome to Contract Assistant We are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and share information when you use our services.</p>
         </section>
 
         <section>
@@ -83,7 +83,7 @@ export default function PrivacyPolicy({ onBack }) {
           <h2>11. Contact Us</h2>
           <div className="legal-contact">
             <p><strong>Contract Assistant</strong></p>
-            <p>Email: <a href="mailto:privacy@contractassistant.com">privacy@contractassistant.com</a></p>
+            <p>Email: <a href="contract20000@gmail.com">contract20000@gmail.com</a></p>
           </div>
         </section>
       </div>
