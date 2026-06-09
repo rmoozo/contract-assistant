@@ -260,3 +260,12 @@ body {
   text-decoration: none;
 }
 .footer-links span:hover, .footer-links a:hover { text-decoration: underline; }
+
+     /* Contact Success */
+.contact-success {
+  text-align: center;
+  padding: 2rem;
+}
+.success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.contact-success h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+.contact-success p { color: #6b7280; }

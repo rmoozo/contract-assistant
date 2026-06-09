@@ -9,6 +9,8 @@ import { getContracts } from './utils/storage'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
 import Footer from './components/Footer'
+import AboutPage from './components/AboutPage'
+import ContactPage from './components/ContactPage'
 
 export default function App() {
   const [user, setUser] = useState(null)
@@ -40,7 +42,9 @@ if (!user) return <AuthScreen onLogin={handleLogin} />
 
   if (page === 'privacy') return <PrivacyPolicy onBack={() => setPage('home')} />
   if (page === 'terms')   return <TermsOfService onBack={() => setPage('home')} />
-
+ if (page === 'about')   return <AboutPage   onBack={() => setPage('home')} />
+  if (page === 'contact') return <ContactPage onBack={() => setPage('home')} />
+  
   return (
     <>
       <Navbar user={user} onLogout={handleLogout} />
